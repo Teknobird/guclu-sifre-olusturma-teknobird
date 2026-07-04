@@ -278,45 +278,6 @@
   .trust .item h3{font-size:.85rem;margin-bottom:4px;}
   .trust .item p{font-size:.8rem;color:#666;margin:0;}
 
-  /* article */
-  article{margin-top:64px;padding-bottom:70px;}
-  article .divider{
-    height:1px;background:var(--line);margin-bottom:48px;
-  }
-  article h2{font-size:1.5rem;margin-top:2.2em;}
-  article h2:first-of-type{margin-top:0;}
-  article p{color:#333;font-size:1rem;}
-  article ul{padding-left:1.2em;color:#333;}
-  article li{margin-bottom:.4em;}
-  .callout{
-    border-left:3px solid var(--brand);
-    background:var(--mist);
-    padding:16px 20px;
-    border-radius:0 10px 10px 0;
-    margin:1.6em 0;
-    font-size:.95rem;
-  }
-  .callout strong{color:var(--brand-deep);}
-
-  .faq details{
-    border-bottom:1px solid var(--line);
-    padding:16px 0;
-  }
-  .faq summary{
-    cursor:pointer;
-    font-weight:600;
-    font-family:'Space Grotesk',sans-serif;
-    list-style:none;
-    display:flex;justify-content:space-between;align-items:center;
-  }
-  .faq summary::-webkit-details-marker{display:none;}
-  .faq summary::after{
-    content:'+';font-size:1.3rem;color:var(--brand);font-weight:400;
-    transition:transform .2s ease;
-  }
-  .faq details[open] summary::after{transform:rotate(45deg);}
-  .faq p{margin:.7em 0 0;color:#444;font-size:.94rem;}
-
   footer.site{
     border-top:1px solid var(--line);
     padding:26px 0 40px;
@@ -424,59 +385,6 @@
         <p>Oluşturulan parolalar hiçbir yerde depolanmaz veya günlüklenmez.</p>
       </div>
     </div>
-
-    <article>
-      <div class="divider"></div>
-
-      <h2>Güçlü bir şifre neden bu kadar önemli?</h2>
-      <p>Her yıl milyonlarca hesap, zayıf veya tekrar kullanılan parolalar yüzünden ele geçiriliyor. Saldırganlar artık parolaları tek tek denemiyor; bir sitede sızan kullanıcı adı-şifre çiftlerini otomatik olarak başka sitelerde deneyen "credential stuffing" adlı yöntemi kullanıyorlar. Yani tek bir zayıf şifre, o şifreyi kullandığınız her hesabı riske atabilir.</p>
-      <p>Güçlü ve her hesap için farklı bir şifre kullanmak, bu saldırıların büyük kısmını daha ilk adımda etkisiz hale getirir.</p>
-
-      <h2>Güçlü bir şifrenin taşıması gereken özellikler</h2>
-      <ul>
-        <li><strong>Uzunluk:</strong> Karmaşıklıktan daha belirleyicidir. 8 karakterli bir şifre saniyeler içinde kırılabilirken, 16 karakterli bir şifrenin denenmesi yıllar alabilir.</li>
-        <li><strong>Karakter çeşitliliği:</strong> Büyük harf, küçük harf, rakam ve sembollerin bir arada kullanılması olası kombinasyon sayısını katlayarak artırır.</li>
-        <li><strong>Öngörülemezlik:</strong> Bir insanın akıl yürüterek tahmin edemeyeceği, gerçek anlamda rastgele bir dizilim olmalıdır.</li>
-      </ul>
-
-      <div class="callout">
-        <strong>Bilgi:</strong> Yukarıdaki araç, karakterleri seçmek için <code>window.crypto.getRandomValues()</code> fonksiyonunu kullanır. Bu, tarayıcıların güvenlik işlemleri için kullandığı, tahmin edilmesi mümkün olmayan bir rastgelelik kaynağıdır — sıradan <code>Math.random()</code> fonksiyonundan çok daha güvenlidir.
-      </div>
-
-      <h2>Kaçınılması gereken yaygın hatalar</h2>
-      <ul>
-        <li>Doğum tarihi, isim veya telefon numarası gibi kişisel bilgiler kullanmak</li>
-        <li><code>123456</code> veya <code>qwerty</code> gibi ardışık tuş dizilimleri</li>
-        <li>Aynı şifreyi birden fazla hesapta kullanmak</li>
-        <li>Bir kelimenin sonuna yalnızca rakam veya ünlem eklemek (ör. <code>Sifre1!</code>)</li>
-      </ul>
-
-      <h2>Şifre yöneticisi kullanmanın avantajı</h2>
-      <p>Onlarca farklı ve karmaşık şifreyi ezberlemek gerçekçi değildir. Bir şifre yöneticisi, bu araçla oluşturduğunuz güçlü parolaları şifrelenmiş bir kasada saklar ve gerektiğinde otomatik olarak doldurur. Böylece her hesap için ayrı ve güçlü bir şifre kullanmak, tek bir ana şifreyi hatırlamaktan ibaret hale gelir.</p>
-
-      <h2>İki faktörlü doğrulama ile ek katman</h2>
-      <p>En güçlü şifre bile tek başına yeterli bir savunma değildir. Mümkün olan her hesapta iki faktörlü doğrulamayı (2FA) etkinleştirmek, şifreniz ele geçirilse dahi hesabınıza girişi tek başına yetersiz kılar.</p>
-
-      <h2 style="margin-top:2.6em;">Sık sorulan sorular</h2>
-      <div class="faq">
-        <details open>
-          <summary>Şifremi ne sıklıkla değiştirmeliyim?</summary>
-          <p>Şifreniz güçlü ve yalnızca o hesaba özgüyse sık sık değiştirmenize gerek yoktur. Değişikliği zorunlu kılan durum, ilgili hizmette bir veri ihlali yaşanmış olmasıdır.</p>
-        </details>
-        <details>
-          <summary>Minimum kaç karakter olmalı?</summary>
-          <p>Günümüz standartlarında önerilen minimum uzunluk 12-16 karakter arasıdır. Bu araçtaki varsayılan değer olan 16 karakter, çoğu hesap için güvenli bir başlangıç noktasıdır.</p>
-        </details>
-        <details>
-          <summary>Özel karakter kullanmak şart mı?</summary>
-          <p>Şart değildir, ancak kullanmak olası kombinasyon sayısını artırarak şifreyi güçlendirir. Bazı sistemler özel karakter kabul etmeyebilir; bu durumda uzunluğu artırmak dengeleyici bir önlemdir.</p>
-        </details>
-        <details>
-          <summary>Oluşturduğum şifreler bir yerde saklanıyor mu?</summary>
-          <p>Hayır. Şifre üretimi tamamen tarayıcınızda gerçekleşir; hiçbir karakter sunucuya gönderilmez veya kaydedilmez.</p>
-        </details>
-      </div>
-    </article>
 
   </div>
 </main>
