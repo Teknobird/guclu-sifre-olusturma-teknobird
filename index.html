@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Güçlü Şifre Oluşturucu | Teknobird</title>
+<meta name="description" content="Teknobird Güçlü Şifre Oluşturucu: kriptografik olarak güvenli, tamamen tarayıcınızda çalışan ücretsiz parola üretici.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#141414;
+    --paper:#ffffff;
+    --brand:#E31E24;
+    --brand-deep:#B0151A;
+    --amber:#F5A623;
+    --mist:#F6F6F6;
+    --line:#E7E7E7;
+    --mono-bg:#111111;
+    --mono-line:#2A2A2A;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Space Grotesk',system-ui,sans-serif;
+    letter-spacing:-0.01em;
+    margin:0 0 .5em;
+    color:var(--ink);
+  }
+  a{color:var(--brand-deep);}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px;}
+
+  /* subtle circuit-pattern backdrop, brand-tinted, low opacity */
+  .backdrop{
+    position:absolute; inset:0; height:520px; z-index:-1;
+    background:
+      radial-gradient(circle at 15% 0%, rgba(227,30,36,0.06), transparent 55%),
+      repeating-linear-gradient(90deg, var(--line) 0 1px, transparent 1px 64px),
+      repeating-linear-gradient(0deg, var(--line) 0 1px, transparent 1px 64px);
+    mask-image: linear-gradient(to bottom, black, transparent);
+    opacity:.6;
+  }
+
+  header.site{
+    position:relative;
+    padding:20px 0;
+    border-bottom:1px solid var(--line);
+  }
+  header.site .wrap{display:flex;align-items:center;justify-content:space-between;}
+  .wordmark{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    font-size:1.1rem;
+    letter-spacing:-0.02em;
+  }
+  .wordmark span{color:var(--brand);}
+  .eyebrow-tag{
+    font-size:.72rem;
+    font-weight:600;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:#7a7a7a;
+    border:1px solid var(--line);
+    padding:5px 10px;
+    border-radius:999px;
+  }
+
+  main{position:relative;}
+
+  .hero{padding:56px 0 8px;position:relative;}
+  .hero .kicker{
+    display:inline-block;
+    font-size:.75rem;
+    font-weight:700;
+    letter-spacing:.09em;
+    text-transform:uppercase;
+    color:var(--brand-deep);
+    background:rgba(227,30,36,0.08);
+    padding:5px 12px;
+    border-radius:999px;
+    margin-bottom:16px;
+  }
+  .hero h1{font-size:2.15rem;font-weight:700;max-width:14ch;}
+  .hero p.lead{font-size:1.05rem;color:#4a4a4a;max-width:52ch;margin:0;}
+
+  /* ---- Tool card ---- */
+  .tool-card{
+    margin:36px 0 28px;
+    background:var(--mono-bg);
+    border-radius:var(--radius);
+    padding:26px;
+    box-shadow:0 18px 40px -20px rgba(0,0,0,.35);
+    border:1px solid #000;
+  }
+  .terminal-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    background:#0A0A0A;
+    border:1px solid var(--mono-line);
+    border-radius:10px;
+    padding:16px 18px;
+  }
+  .dot-row{display:flex;gap:6px;position:absolute;}
+  #pw-display{
+    flex:1;
+    font-family:'JetBrains Mono',monospace;
+    font-size:1.15rem;
+    font-weight:600;
+    color:#F2F2F2;
+    letter-spacing:.03em;
+    word-break:break-all;
+    background:none;
+    border:none;
+    outline:none;
+    caret-color:var(--brand);
+  }
+  .cursor-blink{
+    display:inline-block;width:2px;height:1.1em;background:var(--brand);
+    margin-left:2px;vertical-align:middle;
+    animation:blink 1s steps(1) infinite;
+  }
+  @keyframes blink{50%{opacity:0;}}
+
+  .icon-btn{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:38px;height:38px;border-radius:8px;
+    background:#1B1B1B;border:1px solid var(--mono-line);
+    color:#EDEDED;cursor:pointer;flex-shrink:0;
+    transition:background .15s ease, transform .15s ease;
+  }
+  .icon-btn:hover{background:#242424;}
+  .icon-btn:active{transform:scale(.94);}
+  .icon-btn svg{width:17px;height:17px;}
+
+  .tool-actions{display:flex;gap:10px;margin-top:14px;}
+  .btn-primary{
+    flex:1;
+    background:var(--brand);
+    color:#fff;
+    border:none;
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:600;
+    font-size:.95rem;
+    padding:13px 18px;
+    border-radius:9px;
+    cursor:pointer;
+    transition:background .15s ease, transform .1s ease;
+  }
+  .btn-primary:hover{background:var(--brand-deep);}
+  .btn-primary:active{transform:scale(.98);}
+  .btn-ghost{
+    background:transparent;
+    color:#EDEDED;
+    border:1px solid var(--mono-line);
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:.9rem;
+    padding:13px 16px;
+    border-radius:9px;
+    cursor:pointer;
+  }
+  .btn-ghost:hover{border-color:#454545;}
+
+  /* Strength ladder — brand-ramp signature element */
+  .strength-block{margin-top:20px;}
+  .strength-label-row{
+    display:flex;justify-content:space-between;align-items:baseline;
+    margin-bottom:8px;
+  }
+  .strength-label-row .tag{
+    font-family:'JetBrains Mono',monospace;
+    font-size:.78rem;font-weight:600;
+    color:#EDEDED;
+    letter-spacing:.03em;
+  }
+  .strength-label-row .bits{
+    font-family:'JetBrains Mono',monospace;
+    font-size:.72rem;
+    color:#8a8a8a;
+  }
+  .ladder{display:flex;gap:5px;}
+  .ladder i{
+    flex:1;height:7px;border-radius:3px;
+    background:#262626;
+    transition:background .25s ease;
+  }
+  .ladder i.on-1{background:#8a8a8a;}
+  .ladder i.on-2{background:var(--amber);}
+  .ladder i.on-3{background:var(--brand);}
+  .ladder i.on-4{background:#F2F2F2;}
+  .rungs{display:flex;justify-content:space-between;margin-top:6px;}
+  .rungs span{font-size:.68rem;color:#7a7a7a;font-family:'JetBrains Mono',monospace;}
+
+  /* Options card */
+  .options-card{
+    background:var(--mist);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:24px 26px;
+  }
+  .opt-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;}
+  .opt-row:last-of-type{margin-bottom:0;}
+  .opt-row label.length-label{font-weight:600;font-size:.92rem;}
+  .opt-row .length-value{
+    font-family:'JetBrains Mono',monospace;
+    font-weight:700;color:var(--brand-deep);
+  }
+  input[type="range"]{
+    -webkit-appearance:none;width:100%;height:5px;border-radius:3px;
+    background:linear-gradient(to right, var(--brand) 0%, var(--brand) var(--pct,50%), #DDD var(--pct,50%), #DDD 100%);
+    margin-top:8px;
+  }
+  input[type="range"]::-webkit-slider-thumb{
+    -webkit-appearance:none;width:20px;height:20px;border-radius:50%;
+    background:#fff;border:3px solid var(--brand);cursor:pointer;
+    box-shadow:0 1px 4px rgba(0,0,0,.25);
+  }
+  input[type="range"]::-moz-range-thumb{
+    width:20px;height:20px;border-radius:50%;
+    background:#fff;border:3px solid var(--brand);cursor:pointer;
+  }
+
+  .chip-grid{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px;}
+  .chip{
+    position:relative;
+  }
+  .chip input{position:absolute;opacity:0;inset:0;cursor:pointer;margin:0;width:100%;height:100%;}
+  .chip .pill{
+    display:flex;align-items:center;gap:8px;
+    border:1.5px solid var(--line);
+    background:#fff;
+    padding:10px 16px;
+    border-radius:999px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:.85rem;font-weight:600;
+    color:#5a5a5a;
+    transition:all .15s ease;
+  }
+  .chip .pill .box{
+    width:16px;height:16px;border-radius:5px;border:1.5px solid #CCC;
+    display:inline-flex;align-items:center;justify-content:center;
+    background:#fff;
+  }
+  .chip .pill .box svg{width:10px;height:10px;opacity:0;transition:opacity .1s ease;}
+  .chip input:checked + .pill{border-color:var(--brand);color:var(--ink);background:rgba(227,30,36,0.05);}
+  .chip input:checked + .pill .box{background:var(--brand);border-color:var(--brand);}
+  .chip input:checked + .pill .box svg{opacity:1;}
+  .chip input:focus-visible + .pill{outline:2px solid var(--brand-deep);outline-offset:2px;}
+
+  .toast{
+    position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);
+    background:var(--ink);color:#fff;padding:11px 20px;border-radius:999px;
+    font-size:.85rem;font-weight:600;font-family:'Inter',sans-serif;
+    opacity:0;pointer-events:none;transition:all .25s ease;
+    box-shadow:0 10px 30px -8px rgba(0,0,0,.4);
+    z-index:50;
+  }
+  .toast.show{opacity:1;transform:translate(-50%,0);}
+
+  /* trust strip */
+  .trust{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+    margin:30px 0 8px;
+  }
+  .trust .item{padding:16px 4px;border-top:2px solid var(--ink);}
+  .trust .item h3{font-size:.85rem;margin-bottom:4px;}
+  .trust .item p{font-size:.8rem;color:#666;margin:0;}
+
+  /* article */
+  article{margin-top:64px;padding-bottom:70px;}
+  article .divider{
+    height:1px;background:var(--line);margin-bottom:48px;
+  }
+  article h2{font-size:1.5rem;margin-top:2.2em;}
+  article h2:first-of-type{margin-top:0;}
+  article p{color:#333;font-size:1rem;}
+  article ul{padding-left:1.2em;color:#333;}
+  article li{margin-bottom:.4em;}
+  .callout{
+    border-left:3px solid var(--brand);
+    background:var(--mist);
+    padding:16px 20px;
+    border-radius:0 10px 10px 0;
+    margin:1.6em 0;
+    font-size:.95rem;
+  }
+  .callout strong{color:var(--brand-deep);}
+
+  .faq details{
+    border-bottom:1px solid var(--line);
+    padding:16px 0;
+  }
+  .faq summary{
+    cursor:pointer;
+    font-weight:600;
+    font-family:'Space Grotesk',sans-serif;
+    list-style:none;
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq summary::after{
+    content:'+';font-size:1.3rem;color:var(--brand);font-weight:400;
+    transition:transform .2s ease;
+  }
+  .faq details[open] summary::after{transform:rotate(45deg);}
+  .faq p{margin:.7em 0 0;color:#444;font-size:.94rem;}
+
+  footer.site{
+    border-top:1px solid var(--line);
+    padding:26px 0 40px;
+    font-size:.8rem;
+    color:#888;
+  }
+
+  @media (max-width:560px){
+    .hero h1{font-size:1.7rem;}
+    .trust{grid-template-columns:1fr;}
+    .tool-actions{flex-wrap:wrap;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="backdrop"></div>
+
+<header class="site">
+  <div class="wrap">
+    <div class="wordmark">TEKNO<span>BİRD</span></div>
+    <div class="eyebrow-tag">Güvenlik Araçları</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <section class="hero">
+      <span class="kicker">Ücretsiz Araç</span>
+      <h1>Güçlü Şifre Oluşturucu</h1>
+      <p class="lead">Kriptografik olarak güvenli, yalnızca tarayıcınızda çalışan ve hiçbir yere gönderilmeyen parolalar üretin.</p>
+    </section>
+
+    <section class="tool-card" aria-label="Şifre oluşturma aracı">
+      <div class="terminal-row">
+        <input id="pw-display" type="text" readonly value="" aria-label="Oluşturulan şifre">
+        <button class="icon-btn" id="btn-refresh" title="Yeni şifre üret" aria-label="Yeni şifre üret">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+        </button>
+        <button class="icon-btn" id="btn-copy" title="Kopyala" aria-label="Şifreyi kopyala">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        </button>
+      </div>
+
+      <div class="strength-block">
+        <div class="strength-label-row">
+          <span class="tag" id="strength-tag">GÜÇLÜ</span>
+          <span class="bits" id="strength-bits">~95 bit entropi</span>
+        </div>
+        <div class="ladder">
+          <i id="rung1"></i><i id="rung2"></i><i id="rung3"></i><i id="rung4"></i>
+        </div>
+        <div class="rungs">
+          <span>ZAYIF</span><span>ORTA</span><span>GÜÇLÜ</span><span>ULTRA</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="options-card">
+      <div class="opt-row">
+        <label class="length-label" for="length-slider">Parola uzunluğu</label>
+        <span class="length-value" id="length-value">16</span>
+      </div>
+      <input type="range" id="length-slider" min="6" max="32" value="16" style="margin-bottom:22px;">
+
+      <div class="chip-grid">
+        <label class="chip">
+          <input type="checkbox" id="chk-upper" checked>
+          <span class="pill"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>ABC</span>
+        </label>
+        <label class="chip">
+          <input type="checkbox" id="chk-lower" checked>
+          <span class="pill"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>abc</span>
+        </label>
+        <label class="chip">
+          <input type="checkbox" id="chk-num" checked>
+          <span class="pill"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>123</span>
+        </label>
+        <label class="chip">
+          <input type="checkbox" id="chk-sym">
+          <span class="pill"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>#$&amp;</span>
+        </label>
+      </div>
+    </section>
+
+    <div class="tool-actions" style="margin-top:0;">
+    </div>
+
+    <div class="trust">
+      <div class="item">
+        <h3>Tarayıcıda üretilir</h3>
+        <p>Şifreniz cihazınızdan hiçbir sunucuya gönderilmez.</p>
+      </div>
+      <div class="item">
+        <h3>Web Crypto API</h3>
+        <p>Kriptografik olarak güvenli rastgele sayı üreteci kullanılır.</p>
+      </div>
+      <div class="item">
+        <h3>Kayıt tutulmaz</h3>
+        <p>Oluşturulan parolalar hiçbir yerde depolanmaz veya günlüklenmez.</p>
+      </div>
+    </div>
+
+    <article>
+      <div class="divider"></div>
+
+      <h2>Güçlü bir şifre neden bu kadar önemli?</h2>
+      <p>Her yıl milyonlarca hesap, zayıf veya tekrar kullanılan parolalar yüzünden ele geçiriliyor. Saldırganlar artık parolaları tek tek denemiyor; bir sitede sızan kullanıcı adı-şifre çiftlerini otomatik olarak başka sitelerde deneyen "credential stuffing" adlı yöntemi kullanıyorlar. Yani tek bir zayıf şifre, o şifreyi kullandığınız her hesabı riske atabilir.</p>
+      <p>Güçlü ve her hesap için farklı bir şifre kullanmak, bu saldırıların büyük kısmını daha ilk adımda etkisiz hale getirir.</p>
+
+      <h2>Güçlü bir şifrenin taşıması gereken özellikler</h2>
+      <ul>
+        <li><strong>Uzunluk:</strong> Karmaşıklıktan daha belirleyicidir. 8 karakterli bir şifre saniyeler içinde kırılabilirken, 16 karakterli bir şifrenin denenmesi yıllar alabilir.</li>
+        <li><strong>Karakter çeşitliliği:</strong> Büyük harf, küçük harf, rakam ve sembollerin bir arada kullanılması olası kombinasyon sayısını katlayarak artırır.</li>
+        <li><strong>Öngörülemezlik:</strong> Bir insanın akıl yürüterek tahmin edemeyeceği, gerçek anlamda rastgele bir dizilim olmalıdır.</li>
+      </ul>
+
+      <div class="callout">
+        <strong>Bilgi:</strong> Yukarıdaki araç, karakterleri seçmek için <code>window.crypto.getRandomValues()</code> fonksiyonunu kullanır. Bu, tarayıcıların güvenlik işlemleri için kullandığı, tahmin edilmesi mümkün olmayan bir rastgelelik kaynağıdır — sıradan <code>Math.random()</code> fonksiyonundan çok daha güvenlidir.
+      </div>
+
+      <h2>Kaçınılması gereken yaygın hatalar</h2>
+      <ul>
+        <li>Doğum tarihi, isim veya telefon numarası gibi kişisel bilgiler kullanmak</li>
+        <li><code>123456</code> veya <code>qwerty</code> gibi ardışık tuş dizilimleri</li>
+        <li>Aynı şifreyi birden fazla hesapta kullanmak</li>
+        <li>Bir kelimenin sonuna yalnızca rakam veya ünlem eklemek (ör. <code>Sifre1!</code>)</li>
+      </ul>
+
+      <h2>Şifre yöneticisi kullanmanın avantajı</h2>
+      <p>Onlarca farklı ve karmaşık şifreyi ezberlemek gerçekçi değildir. Bir şifre yöneticisi, bu araçla oluşturduğunuz güçlü parolaları şifrelenmiş bir kasada saklar ve gerektiğinde otomatik olarak doldurur. Böylece her hesap için ayrı ve güçlü bir şifre kullanmak, tek bir ana şifreyi hatırlamaktan ibaret hale gelir.</p>
+
+      <h2>İki faktörlü doğrulama ile ek katman</h2>
+      <p>En güçlü şifre bile tek başına yeterli bir savunma değildir. Mümkün olan her hesapta iki faktörlü doğrulamayı (2FA) etkinleştirmek, şifreniz ele geçirilse dahi hesabınıza girişi tek başına yetersiz kılar.</p>
+
+      <h2 style="margin-top:2.6em;">Sık sorulan sorular</h2>
+      <div class="faq">
+        <details open>
+          <summary>Şifremi ne sıklıkla değiştirmeliyim?</summary>
+          <p>Şifreniz güçlü ve yalnızca o hesaba özgüyse sık sık değiştirmenize gerek yoktur. Değişikliği zorunlu kılan durum, ilgili hizmette bir veri ihlali yaşanmış olmasıdır.</p>
+        </details>
+        <details>
+          <summary>Minimum kaç karakter olmalı?</summary>
+          <p>Günümüz standartlarında önerilen minimum uzunluk 12-16 karakter arasıdır. Bu araçtaki varsayılan değer olan 16 karakter, çoğu hesap için güvenli bir başlangıç noktasıdır.</p>
+        </details>
+        <details>
+          <summary>Özel karakter kullanmak şart mı?</summary>
+          <p>Şart değildir, ancak kullanmak olası kombinasyon sayısını artırarak şifreyi güçlendirir. Bazı sistemler özel karakter kabul etmeyebilir; bu durumda uzunluğu artırmak dengeleyici bir önlemdir.</p>
+        </details>
+        <details>
+          <summary>Oluşturduğum şifreler bir yerde saklanıyor mu?</summary>
+          <p>Hayır. Şifre üretimi tamamen tarayıcınızda gerçekleşir; hiçbir karakter sunucuya gönderilmez veya kaydedilmez.</p>
+        </details>
+      </div>
+    </article>
+
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    © <span id="year"></span> Teknobird — Güçlü Şifre Oluşturucu
+  </div>
+</footer>
+
+<div class="toast" id="toast">Kopyalandı</div>
+
+<script>
+(function(){
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  var lenSlider = document.getElementById('length-slider');
+  var lenValue = document.getElementById('length-value');
+  var chkUpper = document.getElementById('chk-upper');
+  var chkLower = document.getElementById('chk-lower');
+  var chkNum = document.getElementById('chk-num');
+  var chkSym = document.getElementById('chk-sym');
+  var pwDisplay = document.getElementById('pw-display');
+  var strengthTag = document.getElementById('strength-tag');
+  var strengthBits = document.getElementById('strength-bits');
+  var rungs = [document.getElementById('rung1'), document.getElementById('rung2'), document.getElementById('rung3'), document.getElementById('rung4')];
+  var toast = document.getElementById('toast');
+
+  var SETS = {
+    upper: 'ABCDEFGHJKLMNPQRSTUVWXYZ',
+    lower: 'abcdefghijkmnopqrstuvwxyz',
+    num: '23456789',
+    sym: '!@#$%^&*()-_=+?'
+  };
+
+  function secureInt(max){
+    var arr = new Uint32Array(1);
+    var limit = Math.floor(0xFFFFFFFF / max) * max;
+    var val;
+    do { window.crypto.getRandomValues(arr); val = arr[0]; } while (val >= limit);
+    return val % max;
+  }
+
+  function shuffle(arr){
+    for (var i = arr.length - 1; i > 0; i--){
+      var j = secureInt(i + 1);
+      var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+    }
+    return arr;
+  }
+
+  function activeSets(){
+    var sets = [];
+    if (chkUpper.checked) sets.push(SETS.upper);
+    if (chkLower.checked) sets.push(SETS.lower);
+    if (chkNum.checked) sets.push(SETS.num);
+    if (chkSym.checked) sets.push(SETS.sym);
+    return sets;
+  }
+
+  function generate(){
+    var length = parseInt(lenSlider.value, 10);
+    var sets = activeSets();
+    if (sets.length === 0){
+      chkLower.checked = true;
+      sets = activeSets();
+    }
+    var pool = sets.join('');
+    var chars = [];
+
+    // guarantee at least one char from each selected set
+    sets.forEach(function(set){
+      chars.push(set[secureInt(set.length)]);
+    });
+    while (chars.length < length){
+      chars.push(pool[secureInt(pool.length)]);
+    }
+    chars = shuffle(chars).slice(0, length);
+    var password = chars.join('');
+    pwDisplay.value = password;
+    updateStrength(password, sets.length, pool.length, length);
+  }
+
+  function updateStrength(password, setCount, poolSize, length){
+    var entropy = Math.round(length * Math.log2(Math.max(poolSize, 2)));
+    var tier = 1;
+    if (entropy >= 100) tier = 4;
+    else if (entropy >= 70) tier = 3;
+    else if (entropy >= 45) tier = 2;
+    else tier = 1;
+
+    rungs.forEach(function(r, i){
+      r.className = (i < tier) ? 'on-' + tier : '';
+    });
+
+    var labels = ['ZAYIF', 'ORTA', 'GÜÇLÜ', 'ULTRA'];
+    strengthTag.textContent = labels[tier - 1];
+    strengthBits.textContent = '~' + entropy + ' bit entropi';
+  }
+
+  lenSlider.addEventListener('input', function(){
+    lenValue.textContent = lenSlider.value;
+    var pct = ((lenSlider.value - lenSlider.min) / (lenSlider.max - lenSlider.min)) * 100;
+    lenSlider.style.setProperty('--pct', pct + '%');
+    generate();
+  });
+
+  [chkUpper, chkLower, chkNum, chkSym].forEach(function(el){
+    el.addEventListener('change', function(e){
+      var checkedCount = [chkUpper, chkLower, chkNum, chkSym].filter(function(c){return c.checked;}).length;
+      if (checkedCount === 0){ e.target.checked = true; return; }
+      generate();
+    });
+  });
+
+  document.getElementById('btn-refresh').addEventListener('click', generate);
+
+  document.getElementById('btn-copy').addEventListener('click', function(){
+    navigator.clipboard.writeText(pwDisplay.value).then(function(){
+      toast.classList.add('show');
+      setTimeout(function(){ toast.classList.remove('show'); }, 1600);
+    });
+  });
+
+  // init
+  lenSlider.style.setProperty('--pct', ((lenSlider.value - lenSlider.min) / (lenSlider.max - lenSlider.min)) * 100 + '%');
+  generate();
+})();
+</script>
+
+</body>
+</html>
