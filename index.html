@@ -104,6 +104,7 @@
     border:1px solid #000;
   }
   .terminal-row{
+    position:relative;
     display:flex;
     align-items:center;
     gap:12px;
@@ -260,14 +261,16 @@
   .chip input:focus-visible + .pill{outline:2px solid var(--brand-deep);outline-offset:2px;}
 
   .toast{
-    position:fixed;left:50%;top:20px;transform:translate(-50%,-20px);
-    background:var(--ink);color:#fff;padding:11px 20px;border-radius:999px;
-    font-size:.85rem;font-weight:600;font-family:'Inter',sans-serif;
-    opacity:0;pointer-events:none;transition:all .25s ease;
-    box-shadow:0 10px 30px -8px rgba(0,0,0,.4);
+    position:absolute;right:6px;bottom:calc(100% + 10px);
+    background:var(--ink);color:#fff;padding:8px 16px;border-radius:999px;
+    font-size:.8rem;font-weight:600;font-family:'Inter',sans-serif;
+    opacity:0;pointer-events:none;transition:all .2s ease;
+    box-shadow:0 8px 20px -6px rgba(0,0,0,.5);
+    transform:translateY(6px);
+    white-space:nowrap;
     z-index:50;
   }
-  .toast.show{opacity:1;transform:translate(-50%,0);}
+  .toast.show{opacity:1;transform:translateY(0);}
 
   /* trust strip */
   .trust{
@@ -325,6 +328,7 @@
         <button type="button" class="icon-btn" id="btn-copy" title="Kopyala" aria-label="Şifreyi kopyala">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
+        <div class="toast" id="toast">Kopyalandı</div>
       </div>
 
       <div class="strength-block">
@@ -395,7 +399,6 @@
   </div>
 </footer>
 
-<div class="toast" id="toast">Kopyalandı</div>
 
 <script>
 (function(){
