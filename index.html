@@ -115,18 +115,20 @@
   }
   .dot-row{display:flex;gap:6px;position:absolute;}
   #pw-display{
-    flex:1;
-    font-family:'JetBrains Mono',monospace;
-    font-size:1.15rem;
-    font-weight:600;
-    color:#F2F2F2;
-    letter-spacing:.03em;
-    word-break:break-all;
-    background:none;
-    border:none;
-    outline:none;
-    caret-color:var(--brand);
-  }
+flex:1;
+  width: 100%;
+  min-width: 0; /* Input'un butonları sağa itmesini engeller */
+  font-family:'JetBrains Mono',monospace;
+  font-size:1.15rem;
+  font-weight:600;
+  color:#F2F2F2;
+  letter-spacing:.03em;
+  word-break:break-all;
+  background:none;
+  border:none;
+  outline:none;
+  caret-color:var(--brand);
+}
   .cursor-blink{
     display:inline-block;width:2px;height:1.1em;background:var(--brand);
     margin-left:2px;vertical-align:middle;
