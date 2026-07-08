@@ -544,6 +544,21 @@
   // init
   lenSlider.style.setProperty('--pct', ((lenSlider.value - lenSlider.min) / (lenSlider.max - lenSlider.min)) * 100 + '%');
   generate();
+  // --- Mobil iframe yükseklik senkronizasyonu (WordPress embed için) ---
+  function sendHeightToParent(){
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({
+        source: 'teknobird-pw-tool',
+        height: document.documentElement.scrollHeight
+      }, '*');
+    }
+  }
+  window.addEventListener('load', sendHeightToParent);
+  window.addEventListener('resize', sendHeightToParent);
+  if ('ResizeObserver' in window) {
+    new ResizeObserver(sendHeightToParent).observe(document.body);
+  }
+  setTimeout(sendHeightToParent, 300); // fontlar/layout oturduktan sonra tekrar gönder
 })();
 </script>
 
